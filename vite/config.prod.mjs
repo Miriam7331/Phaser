@@ -17,7 +17,7 @@ const phasermsg = () => {
 };
 
 export default defineConfig({
-  base: "https://github.com/Miriam7331/Phaser",
+  base: "./",
   logLevel: "warning",
   build: {
     rollupOptions: {

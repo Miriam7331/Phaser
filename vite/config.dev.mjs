@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "https://github.com/Miriam7331/Phaser",
+  base: "./",
   build: {
     rollupOptions: {
       output: {
