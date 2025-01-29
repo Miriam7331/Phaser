@@ -53,5 +53,31 @@ export class MainMenu extends Scene {
       yoyo: true,
       repeat: -1,
     });
+    this.obtenerDatosBicicletas();
+  }
+  obtenerDatosBicicletas() {
+    fetch("https://myapp-12p0.onrender.com/api/bicicletas")
+      .then((respuesta) => {
+        if (!respuesta.ok) {
+          throw new Error("Error en la solicitud");
+        }
+        return respuesta.json();
+      })
+      .then((datos) => {
+        console.log("Datos de bicicletas:", datos);
+
+        if (Array.isArray(datos)) {
+          datos.forEach((bicicleta, index) => {
+            this.add.text(100, 100 + index * 30, bicicleta.nombre, {
+              fontFamily: "Arial",
+              fontSize: 24,
+              color: "#ffffff",
+            });
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Hubo un error al obtener los datos:", error);
+      });
   }
 }
