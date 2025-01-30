@@ -66,15 +66,15 @@ export class MainMenu extends Scene {
       .then((datos) => {
         console.log("Datos de bicicletas:", datos);
 
-        if (Array.isArray(datos)) {
-          datos.forEach((bicicleta, index) => {
-            this.add.text(100, 100 + index * 30, bicicleta.nombre, {
-              fontFamily: "Arial",
-              fontSize: 24,
-              color: "#ffffff",
-            });
-          });
-        }
+        // if (Array.isArray(datos)) {
+        //   datos.forEach((bicicleta, index) => {
+        //     this.add.text(100, 100 + index * 30, bicicleta.nombre, {
+        //       fontFamily: "Arial",
+        //       fontSize: 24,
+        //       color: "#ffffff",
+        //     });
+        //   });
+        // }
       })
       .catch((error) => {
         console.error("Hubo un error al obtener los datos:", error);
