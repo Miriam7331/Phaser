@@ -1,3 +1,4 @@
+import { Bugfender } from "@bugfender/sdk";
 import { Scene } from "phaser";
 
 export class MainMenu extends Scene {
@@ -45,6 +46,28 @@ export class MainMenu extends Scene {
       this.scene.start("Game");
     });
 
+    // Botón para generar errores
+    const errorButton = this.add
+      .text(512, 600, "Generar Error", {
+        fontFamily: "Tahoma",
+        fontSize: 32,
+        color: "#ff0000",
+        stroke: "#000000",
+        strokeThickness: 4,
+        align: "center",
+      })
+      .setOrigin(0.5)
+      .setInteractive();
+
+    errorButton.on("pointerdown", () => {
+      try {
+        throw new Error("Este es un error de prueba.");
+      } catch (error) {
+        Bugfender.error("Se generó un error de prueba:", error);
+        Bugfender.info("Se generó un error de prueba:", error);
+      }
+    });
+
     this.tweens.add({
       targets: playButton,
       y: 530,
@@ -65,16 +88,17 @@ export class MainMenu extends Scene {
       })
       .then((datos) => {
         console.log("Datos de bicicletas:", datos);
+        Bugfender.info("Datos de bicicletas cargados:", datos);
 
-        // if (Array.isArray(datos)) {
-        //   datos.forEach((bicicleta, index) => {
-        //     this.add.text(100, 100 + index * 30, bicicleta.nombre, {
-        //       fontFamily: "Arial",
-        //       fontSize: 24,
-        //       color: "#ffffff",
-        //     });
-        //   });
-        // }
+        if (Array.isArray(datos)) {
+          datos.forEach((bicicleta, index) => {
+            this.add.text(100, 100 + index * 30, bicicleta.nombre, {
+              fontFamily: "Arial",
+              fontSize: 24,
+              color: "#ffffff",
+            });
+          });
+        }
       })
       .catch((error) => {
         console.error("Hubo un error al obtener los datos:", error);

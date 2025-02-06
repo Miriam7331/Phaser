@@ -1,3 +1,4 @@
+import { Bugfender } from "@bugfender/sdk";
 import { Scene } from "phaser";
 
 export class Game extends Scene {
@@ -28,6 +29,17 @@ export class Game extends Scene {
 
     this.input.once("pointerdown", () => {
       this.scene.start("GameOver");
+      Bugfender.info("Game Over");
+    });
+
+    // Captura de error al presionar SPACE
+    this.input.keyboard.on("keydown-SPACE", () => {
+      try {
+        let num = null;
+        console.log(num.toString()); // Esto generará un error
+      } catch (error) {
+        Bugfender.error("Error al presionar la tecla SPACE:", error);
+      }
     });
   }
 }
